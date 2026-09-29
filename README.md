@@ -37,3 +37,11 @@ Clone the repository and install the dependencies:
 git clone [https://github.com/priyam63p/pdf-query-rag.git](https://github.com/priyam63p/pdf-query-rag.git)
 cd pdf-query-rag
 npm install
+
+pdf-query-rag/
+├── data/               # Input PDF files
+├── .env                # API keys and secrets (gitignored)
+├── .gitignore          # Version control ignore file
+├── package.json        # Dependencies and scripts
+├── index.js            # Main execution script
+└── README.md           # Project documentation
