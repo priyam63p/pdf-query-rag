@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>DocuMind — AI PDF Assistant</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+  <div class="app">
+
+
+  
+    
+
+    <aside class="sidebar">
+
+      <div class="brand">
+
+        <div class="brand-icon">
+          ◈
+        </div>
+
+        <div>
+          <h1>DocuMind</h1>
+          <span>AI Document Intelligence</span>
+        </div>
+
+      </div>
+
+
+      <button
+        class="new-chat-btn"
+        id="newChatBtn"
+      >
+
+        <span>＋</span>
+
+        New conversation
+
+      </button>
+
+
+      <!-- Documents -->
+
+      <div class="sidebar-section">
+
+        <div class="section-header">
+
+          <span>YOUR DOCUMENTS</span>
+
+          <span
+            class="document-count"
+            id="documentCount"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div
+          class="documents"
+          id="documents"
+        >
+
+          <div class="empty-documents">
+
+            <div class="empty-icon">
+              📄
+            </div>
+
+            <p>No documents yet</p>
+
+            <small>
+              Upload a PDF to get started
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sidebar-bottom">
+
+        <div class="system-status">
+
+          <span class="status-dot"></span>
+
+          <div>
+
+            <strong>System ready</strong>
+
+            <small>
+              Gemini + Pinecone
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <main class="main">
+
+
+   
+
+      <header class="topbar">
+
+        <div class="mobile-brand">
+
+          <div class="brand-icon">
+            ◈
+          </div>
+
+          <strong>
+            DocuMind
+          </strong>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <div
+            class="connection"
+            id="connectionStatus"
+          >
+
+            <span class="status-dot"></span>
+
+            <span>
+              Connected
+            </span>
+
+          </div>
+
+
+          <button
+            class="upload-btn"
+            id="uploadBtn"
+          >
+
+            <span>↑</span>
+
+            Upload PDF
+
+          </button>
+
+          <input
+            type="file"
+            id="fileInput"
+            accept=".pdf,application/pdf"
+            hidden
+          >
+
+        </div>
+
+      </header>
+
+
+
+
+
+      <section
+        class="chat-container"
+        id="chatContainer"
+      >
+
+
+     
+
+
+        <div
+          class="welcome"
+          id="welcome"
+        >
+
+          <div class="hero-icon">
+
+            <div class="hero-glow"></div>
+
+            <span>✦</span>
+
+          </div>
+
+
+          <p class="eyebrow">
+            AI-POWERED DOCUMENT SEARCH
+          </p>
+
+
+          <h2>
+            Ask your documents
+            <span>anything.</span>
+          </h2>
+
+
+          <p class="welcome-description">
+
+            Upload a PDF and have a conversation
+            with its contents using retrieval-augmented
+            generation.
+
+          </p>
+
+
+          <div class="suggestions">
+
+            <button
+              class="suggestion"
+              data-question="Summarize this document"
+            >
+
+              <span>✦</span>
+
+              Summarize this document
+
+            </button>
+
+
+            <button
+              class="suggestion"
+              data-question="What are the main topics covered in this document?"
+            >
+
+              <span>⌁</span>
+
+              Find the main topics
+
+            </button>
+
+
+            <button
+              class="suggestion"
+              data-question="Explain the most important concepts in this document"
+            >
+
+              <span>◈</span>
+
+              Explain key concepts
+
+            </button>
+
+
+          </div>
+
+        </div>
+
+
+
+      
+
+        <div
+          class="messages"
+          id="messages"
+        ></div>
+
+
+      </section>
+
+
+
+      
+
+      <footer class="composer-wrapper">
+
+
+        <div
+          class="selected-document"
+          id="selectedDocument"
+        >
+
+          <span>◉</span>
+
+          <span id="selectedDocumentName">
+            All documents
+          </span>
+
+          <button
+            id="clearDocument"
+            title="Search all documents"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div class="composer">
+
+          <textarea
+            id="questionInput"
+            placeholder="Ask anything about your documents..."
+            rows="1"
+          ></textarea>
+
+
+          <button
+            id="sendBtn"
+            class="send-btn"
+            title="Send"
+          >
+
+            <span>↑</span>
+
+          </button>
+
+        </div>
+
+
+        <div class="composer-info">
+
+          <span>
+            DocuMind can make mistakes. Verify important information.
+          </span>
+
+          <span>
+            Press <kbd>Enter</kbd> to send
+          </span>
+
+        </div>
+
+
+      </footer>
+
+
+    </main>
+
+  </div>
+
+
+  
+
+
+  <div
+    class="modal-overlay"
+    id="uploadModal"
+  >
+
+    <div class="upload-modal">
+
+
+      <button
+        class="close-modal"
+        id="closeModal"
+      >
+        ×
+      </button>
+
+
+      <div class="modal-icon">
+        ↑
+      </div>
+
+
+      <h3>
+        Upload a PDF
+      </h3>
+
+
+      <p>
+        Add a document to your knowledge base
+        and start asking questions.
+      </p>
+
+
+      <div
+        class="drop-zone"
+        id="dropZone"
+      >
+
+        <div class="drop-icon">
+          📄
+        </div>
+
+        <strong>
+          Drop your PDF here
+        </strong>
+
+        <span>
+          or click to browse
+        </span>
+
+        <small>
+          Maximum file size: 25 MB
+        </small>
+
+      </div>
+
+
+      <div
+        class="upload-progress"
+        id="uploadProgress"
+      >
+
+        <div class="progress-info">
+
+          <span id="progressText">
+            Processing document...
+          </span>
+
+          <span>
+            <span id="progressPercent">0</span>%
+          </span>
+
+        </div>
+
+
+        <div class="progress-track">
+
+          <div
+            class="progress-bar"
+            id="progressBar"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
