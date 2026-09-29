@@ -38,6 +38,8 @@ git clone [https://github.com/priyam63p/pdf-query-rag.git](https://github.com/pr
 cd pdf-query-rag
 npm install
 
+---
+
 ## 📁 Project Structure
 
 ```text
