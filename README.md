@@ -38,10 +38,20 @@ git clone [https://github.com/priyam63p/pdf-query-rag.git](https://github.com/pr
 cd pdf-query-rag
 npm install
 
+## 📁 Project Structure
+
+```text
 pdf-query-rag/
-├── data/               # Input PDF files
-├── .env                # API keys and secrets (gitignored)
-├── .gitignore          # Version control ignore file
-├── package.json        # Dependencies and scripts
-├── index.js            # Main execution script
+├── backend/
+│   ├── indexing.js     # Script for parsing PDFs & embedding vectors into Pinecone
+│   ├── query.js        # Logic for processing search queries against Pinecone & Gemini
+│   └── server.js       # Express REST API server
+├── frontend/
+│   ├── index.html      # Main Web UI layout
+│   ├── script.js       # Client-side JavaScript API caller
+│   └── style.css       # Custom UI styling
+├── .env                # API keys and environment variables (gitignored)
+├── .gitignore          # Files to ignore in version control
+├── merged-pdf.pdf      # Sample / default source PDF document
+├── package.json        # Node.js dependencies and project scripts
 └── README.md           # Project documentation
